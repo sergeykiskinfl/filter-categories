@@ -2,6 +2,7 @@ import Image from "next/image";
 import ProductCart from "./components/ProductCard";
 import Filters from "./components/Filters";
 import { Grid, GridItem } from "@chakra-ui/react";
+import { getData } from "@/actions";
 
 type Product = {
   id: number;
@@ -12,28 +13,32 @@ type Product = {
   images: string[];
 };
 
-async function getData() {
-  const res = await fetch(
-    "https://dummyjson.com/products?limit=9&skip=10&select=id,title,category,price,description,images"
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const data = await getData();
 
   const categories = Array.from(
     new Set([...data.products.map((item: Product) => item["category"])])
   );
 
+  const selectedCategory = searchParams.category;
+
+  let filteredProducts;
+
+  if (selectedCategory) {
+    filteredProducts = [...data.products].filter(
+      (product: Product) => product.category === selectedCategory
+    );
+  } else {
+    filteredProducts = [...data.products];
+  }
+
   // console.log("data", data);
 
-  console.log("categories", categories);
+  // console.log("categories", categories);
 
   return (
     <main className="flex min-h-screen flex-col items-start justify-between p-24">
@@ -43,7 +48,7 @@ export default async function Home() {
         templateColumns="repeat(3, 1fr)"
         gap={4}
       >
-        {[...data.products].map((product: Product) => {
+        {filteredProducts.map((product: Product) => {
           const { id, title, category, price, description, images } = product;
 
           return (
