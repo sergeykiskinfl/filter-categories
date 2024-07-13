@@ -18,6 +18,7 @@ export default async function Home({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  //Запрос кешируется и не повторяется
   const data = await getData();
 
   const categories = Array.from(
