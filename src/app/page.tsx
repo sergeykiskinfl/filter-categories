@@ -1,6 +1,6 @@
 import Image from "next/image";
-import ProductCart from "./components/ProductCard";
-import Filters from "./components/Filters";
+import ProductCart from "../components/ProductCard";
+import Filters from "../components/Filters";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { getData } from "@/actions";
 
@@ -36,11 +36,7 @@ export default async function Home({
   } else {
     filteredProducts = [...data.products];
   }
-
-  // console.log("data", data);
-
-  // console.log("categories", categories);
-
+  
   return (
     <main className="flex min-h-screen flex-col items-start justify-between p-24">
       <Filters categories={categories} />
