@@ -1,11 +1,6 @@
-import {
-  Card,  
-  CardBody,  
-  Stack,
-  Heading,
-  Text,
-  Image,
-} from "@chakra-ui/react";
+import { Card, CardBody, Stack, Heading, Text } from "@chakra-ui/react";
+
+import Image from "next/image";
 
 type Props = {
   title: string;
@@ -23,13 +18,15 @@ export default function ProductCart({
   imageSrc,
 }: Props) {
   return (
-    <Card maxW="sm" minH="lg">
+    <Card w="sm" minH="lg">
       <CardBody>
         <Image
-          objectFit="cover"
-          maxW={{ base: "100%", sm: "200px" }}
           src={imageSrc}
-          alt={title}
+          width={200}
+          height={200}
+          priority={true}
+          alt="Picture of the author"
+          style={{margin: "auto", height: 200, width: 200 }}
         />
         <Stack mt="6" spacing="3">
           <Heading size="md">{title}</Heading>

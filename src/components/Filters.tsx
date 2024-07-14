@@ -3,6 +3,7 @@
 import { Button, HStack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 
+// Фильтры по категориям
 export default function Filters({ categories }: { categories: string[] }) {
   const colors = ["green", "orange", "yellow", "teal", "blue", "red"];
 
