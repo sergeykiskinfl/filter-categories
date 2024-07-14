@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ProductCart from "../components/ProductCard";
 import Filters from "../components/Filters";
 import { Grid, GridItem } from "@chakra-ui/react";
